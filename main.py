@@ -32,7 +32,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/login")
 
 # PostgreSQL setup with safe character URL encoding
 DB_USER = "postgres"
-DB_PASSWORD = "C-pad@21"
+DB_PASSWORD = "password"
 DB_HOST = "localhost"
 DB_PORT = "5432"
 DB_NAME = "rag_db"
