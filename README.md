@@ -30,24 +30,24 @@ The core idea: instead of relying on a generic LLM that knows nothing about your
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                     React Frontend                       │
-│         (Upload Documents · Ask Questions · Auth)        │
+│                     React Frontend                      │
+│         (Upload Documents · Ask Questions · Auth)       │
 └──────────────────────┬──────────────────────────────────┘
                        │ HTTP (REST API)
 ┌──────────────────────▼──────────────────────────────────┐
-│                FastAPI Backend  (main.py)                │
-│                                                          │
+│                FastAPI Backend  (main.py)               │
+│                                                         │
 │   /api/signup   /api/login   /api/upload   /api/chat    │
-│                                                          │
+│                                                         │
 │   JWT Auth Middleware  ·  User Isolation by tenant ID   │
 └───────┬─────────────────────────────┬───────────────────┘
         │                             │
-┌───────▼──────────┐       ┌──────────▼──────────────────┐
+┌───────▼──────────┐       ┌──────────▼─────────────────-─┐
 │   PostgreSQL DB  │       │       RAG Backend            │
 │                  │       │                              │
-│  - Users table   │       │  loader.py   → Parse file   │
-│  - Auth tokens   │       │  splitter.py → Chunk text   │
-└──────────────────┘       │  vectorstore.py → Embed &   │
+│  - Users table   │       │  loader.py   → Parse file    │
+│  - Auth tokens   │       │  splitter.py → Chunk text    │
+└──────────────────┘       │  vectorstore.py → Embed &    │
                            │               Store in Chroma│
                            │  retriever.py → Semantic     │
                            │    search + Ollama LLM call  │
@@ -67,7 +67,7 @@ File Upload → load_document() → split_documents() → add_documents() → Ch
 ```
 
 | Step | Module | What It Does |
-|---|---|---|
+|-------|-------------------|---------------------------------------------|
 | Parse | `loader.py` | Extracts raw text from PDF / DOCX / TXT |
 | Chunk | `splitter.py` | Splits into overlapping chunks (1000 chars, 200 overlap) |
 | Embed | `vectorstore.py` | Encodes chunks using `all-MiniLM-L6-v2` sentence-transformers |
