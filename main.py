@@ -14,10 +14,10 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 
 # ── IMPORT MEMBER C'S RAG CORE FUNCTIONS ──
-from rag.loader import load_document
-from rag.splitter import split_documents
-from rag.vectorstore import add_documents
-from rag.retriever import retrieve_and_answer
+from rag_backend.loader import load_document
+from rag_backend.splitter import split_documents
+from rag_backend.vectorstore import add_documents
+from rag_backend.retriever import retrieve_and_answer
 from config import UPLOAD_DIR
 
 # ==========================================
